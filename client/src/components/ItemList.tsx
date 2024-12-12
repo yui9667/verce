@@ -11,9 +11,7 @@ const ItemList = () => {
   const [items, setItems] = useState<Item[]>([]);
   const fetchItems = async () => {
     try {
-      const response = await axios.get(
-        'https://verce-server.vercel.app/api/items'
-      );
+      const response = await axios.get('https://verce-server.vercel.app/items');
       setItems(response.data);
     } catch (error) {
       console.error('Failed to fetch items:', error);
@@ -22,7 +20,8 @@ const ItemList = () => {
 
   const deleteItem = async (id: string) => {
     try {
-      await axios.delete(`https://verce-server.vercel.app/api/items/${id}`);
+      await axios.delete(`https://verce-server.vercel.app/items/${id}`);
+      fetchItems();
     } catch (error) {
       console.error('Failed to delete items:', error);
     }
